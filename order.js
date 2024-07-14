@@ -6,7 +6,7 @@ const checkout_Price = document.querySelector(".checkout-price")
 checkCookie("cart")
 pageReload()
 render_Page()
-
+//make html from data im cookies
 function render_Page(){
   const cookie = getCookie("cart")
   if(typeof cookie == 'string'){

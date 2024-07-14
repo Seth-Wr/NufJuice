@@ -22,18 +22,35 @@ main{
     position: sticky;
     top: 0;
     z-index: 29;
-    height: 32px;
+    height: 40px;
 }
 .nav-content{
 
     width: 100%;
     position: relative;
 }
-
-.shopping-bag{
+.shopping-bag-box{
     position: absolute;
-    right: 16px;
-    top: 6px;
+    right: 24px;
+    top: 10px;
+}
+.shopping-bag-qty{
+    position: absolute;
+    right: -10px;
+    top: -8px;
+    background-color: #854858;
+    border-radius: 2px;
+    color: #fff;
+    display: none;
+    font-size: .75rem;
+    height: 14px;
+    line-height: 14px;
+    min-width: 14px;
+    padding: 0 2px;
+    text-align: center;
+}
+.shopping-bag-qty.active{
+    display: inline-block;
 }
 .menu-header{
     text-align: center;
@@ -50,15 +67,15 @@ main{
     opacity: 0;
     color: #000;
     margin: 0;
-    padding: 8px;
+    padding: 12px;
     font-weight: 400;
     animation: ad-1 15s infinite; 
-    font-size: 12px;
+    font-size: 13px;
 }
 .ad-2 p{
-    font-size: 12px;
+    font-size: 13px;
     opacity: 0;
-    padding: 8px;
+    padding: 12px;
     color: #000;
     margin: 0;
     font-weight: 400;

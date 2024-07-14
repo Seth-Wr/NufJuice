@@ -19,7 +19,10 @@
                     <p>New Drink Jamaican Sorrel In Stock</p>
                 </div>
             </div>
-            <img class="shopping-bag"src="./img/shopping-bag.svg" alt="">
+            <div class="shopping-bag-box">
+                <img class="shopping-bag"src="./img/shopping-bag.svg" alt="">
+                <span class="shopping-bag-qty"></span>
+            </div>
         </div>
         
     </nav>
@@ -28,136 +31,7 @@
     </div>
     <div class="order">
         <h3>My Order</h3>
-        <div class="product-card">
-            <div class="img-box">
-            <img src="img/img1.jpg" alt="">
-        </div>
-        <div class="card-text">
-            <h4 class="product-name">Sorrel</h4>
-            <span class="price">$4.99</span>
-           
-            </div>      
-            <div class="qty-wrapper">
-                <select class="qty-select" id="">
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10+</option>
-                </select>
-                <button>remove</button>
-            </div>
-            </div>
-            <div class="product-card">
-                <div class="img-box">
-                <img src="img/img5.jpg" alt="">
-            </div>
-            <div class="card-text">
-                <h4 class="product-name">Strawberry Watermelon</h4>
-                <span class="price">$4.99</span>           
-                        
-                </div>
-                <div class="qty-wrapper">
-                    <select class="qty-select" id="">
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10+</option>
-                    </select>
-                    <button>remove</button>
-                </div>
-                </div>
-                <div class="product-card">
-                    <div class="img-box">
-                    <img src="img/img2.jpg" alt="">
-                </div>
-                <div class="card-text">
-                    <h4 class="product-name">Raspberry</h4>
-                    <span class="price">$4.99</span>           
-                            
-                    </div>
-                    <div class="qty-wrapper">
-                        <select class="qty-select" id="">
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10+</option>
-                        </select>
-                        <button>remove</button>
-                    </div>
-                    </div>
-                    <div class="product-card">
-                        <div class="img-box">
-                        <img src="img/img3.jpg" alt="">
-                    </div>
-                    <div class="card-text">
-                        <h4 class="product-name">Lime</h4>
-                        <span class="price">$4.99</span>           
-                                
-                        </div>
-                        <div class="qty-wrapper">
-                            <select class="qty-select" id="">
-                                <option value="0">0</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10+</option>
-                            </select>
-                            <button>remove</button>
-                        </div>
-                        </div>
-                        <div class="product-card">
-                            <div class="img-box">
-                            <img src="img/img4.jpg" alt="">
-                        </div>
-                        <div class="card-text">
-                            <h4 class="product-name">Mango Passion</h4>
-                            <span class="price">$4.99</span>           
-                                    
-                            </div>
-                            <div class="qty-wrapper">
-                                <select class="qty-select" id="">
-                                    <option value="0">0</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
-                                    <option value="10">10+</option>
-                                </select>
-                                <button>remove</button>
-                            </div>
-                            </div>
+  
     </div>
   
 <div class="checkout">
@@ -184,8 +58,8 @@
         <li>Local Delivery Only</li>
     </ul>
     <div class="total">
-        <span class="total-qty">15 Items</span>
-        <span class="total-price">Total Price <span class="checkout-price">$74.85</span></span>
+        <span class="total-qty">0 Items</span>
+        <span class="total-price">Total Price <span class="checkout-price">$0.00</span></span>
     </div>
     <div class="checkout-btn-box">
         <button class="checkout-btn">Place Order</button>
@@ -198,9 +72,10 @@
     <ul>
         <li><a href="">Home</a> </li>
         <li> Hours of Operation <br> Mon-Sat 8am-8pm</li>
-        <li><a href="">Support</a> </li>
+        <li><a href="mailto:SethWrighttech@gmail.com">Support</a> </li>
     
     </ul>
 </footer>
+<script src="order.js"></script>
 </body>
 </html>

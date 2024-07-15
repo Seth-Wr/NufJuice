@@ -164,6 +164,17 @@ box-shadow: 0 0 5px 0 rgba(0, 0, 0, .1);
     padding-left: 8px;
     margin-bottom: 40px;
     margin-top: 8px;
+} 
+.qty-select.input{
+    border-style: solid;
+    border-color: #000;
+    border-width: 1px;
+    border-radius: 16px;
+    width: 32px;
+    background: none;
+    padding-left: 16px;
+    margin-bottom: 40px;
+    margin-top: 8px;
 }
 .qty-wrapper{
 padding-right: 16px;
@@ -183,6 +194,9 @@ padding-right: 16px;
     flex-direction: column;
 }
 .checkout ul{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
     margin: 0;
     margin-bottom: 8px;
 }
@@ -195,7 +209,7 @@ width: 100%;
 .number{
     display: flex;
     justify-content: center;
-margin-bottom: 8px;
+margin-bottom: 16px;
 width: 100%;
 }
 .shipping{

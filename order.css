@@ -1,3 +1,14 @@
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
 body{
     margin: 0;
    background-color: rgba(251, 250, 247, 1);
@@ -128,9 +139,7 @@ margin-right: 24px;
 border-radius: 24px;
 box-shadow: 0 0 5px 0 rgba(0, 0, 0, .1);
 }
-.img-box{
 
-}
 .img-box img{
     object-fit: scale-down;
     height: 80px;
@@ -164,23 +173,42 @@ box-shadow: 0 0 5px 0 rgba(0, 0, 0, .1);
     padding-left: 8px;
     margin-bottom: 40px;
     margin-top: 8px;
+    display: none;
+    
+    
 } 
-.qty-select.input{
+.qty-select.active{
+   display: inline-block;
+}
+.qty-input{
+    position: absolute;
+    top: 0px;
+    left: 0;
     border-style: solid;
     border-color: #000;
     border-width: 1px;
     border-radius: 16px;
-    width: 32px;
+    width: 46px;
     background: none;
-    padding-left: 16px;
     margin-bottom: 40px;
     margin-top: 8px;
+    text-align: center;
+    padding: 0;
+    display: none;
+}
+.qty-input.active{
+    display: inline-block;
 }
 .qty-wrapper{
-padding-right: 16px;
-
+margin-right: 16px;
+position: relative;
+min-width: 64px;
+height: 85px;
 }
 .qty-wrapper button{
+    position: absolute;
+    bottom: 0;
+    left: 0;
     padding: 0;
     border: none;
     background: none;

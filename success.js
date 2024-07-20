@@ -1,1 +1,0 @@
-const shopping_bag_qty = document.querySelector(".shopping-bag-qty")

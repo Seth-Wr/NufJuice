@@ -215,6 +215,11 @@ height: 85px;
     text-decoration: underline solid 1px #000;
 
 }
+.msg-wrapper{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
 .checkout{
     margin: 32px;
     display: flex;
@@ -227,6 +232,9 @@ height: 85px;
     flex-direction: column;
     margin: 0;
     margin-bottom: 8px;
+}
+.shipping-msg{
+    padding: 0;
 }
 .email{
     display: flex;

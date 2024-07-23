@@ -59,7 +59,7 @@ function render_Page(){
    //update the dom 
     order.innerHTML = finalhtml
   
-  }
+  }else console.log("nocart")
 }
 
 function Checkout_Form(phone,email,shipping,order){
@@ -81,16 +81,20 @@ const checkout_form = new Checkout_Form(number_Input.value,email_Input.value,shi
        
     }
     else{
-        
-        fetch('/order',{
-            method: 'post',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(checkout_form),
-        }).then((res) =>{
-            if(res.status ==200){
-                window.location.href = '/success'
-            }
-        })
+        try {
+            fetch('/order',{
+                method: 'post',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(checkout_form),
+            }).then((res) =>{
+                if(res.status ==200){
+                    window.location.href = '/success'
+                }
+            })
+        } catch (error) {
+            
+        }
+      
     }
 
 })

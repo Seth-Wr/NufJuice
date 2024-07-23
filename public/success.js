@@ -53,7 +53,7 @@ function render_Page(){
     }
   }
 
-
+//create html for each product
   function create_Order(name,price,img_url,qty){
     //product card html for front end
   return  `<div class="product-card">

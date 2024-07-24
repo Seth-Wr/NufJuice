@@ -115,6 +115,23 @@ main{
     95%{opacity: 1;}
     100%{opacity: 0;}
 }
+.homepage-box{
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+    margin-bottom: 40px;
+    text-decoration: none;
+}
+.homepage{
+    width: 120px;
+    height: 40px;
+ border-radius: 24px; 
+ background-color: #000;  
+ font-weight: 700;
+ color: #fff;
+ font-size: 16px; 
+ margin-bottom: 8px;  
+}
 
 .order{
     margin-top:40px;
@@ -323,6 +340,16 @@ width: 100%;
     opacity: .85;
     color: #fff;
     font-weight: 400;
+}
+.error-msg{
+    text-align: center;
+   color: red; 
+   margin: 8px;
+   display: none;
+   
+}
+.error-msg.active{
+    display: block;
 }
 .footer ul{
     list-style: none;

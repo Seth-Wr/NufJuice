@@ -15,6 +15,10 @@ let staticPath = path.join(__dirname, "public");
 app.use(express.static(staticPath));
 app.use(express.json())
 
+
+  
+
+
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     host: "smtp.gmail.com",
@@ -43,12 +47,12 @@ const transporter = nodemailer.createTransport({
   const sendMail = async (transporter, mailOptions) =>{
     try {
       await transporter.sendMail(mailOptions);
-      
-      
+      return true
       //change status of order  after email is semt to the user
 
     } catch (error) {
       console.error(error)
+      return false
     }
   }
  
@@ -67,44 +71,93 @@ app.get("/success",(req, res) => {
 //called when customer wants to buy and then we get there number and finish the rest of local delivery steps from our phones
 //all i need is there order and phone number then i can continue the delivery with there phone            
 app.post("/order", async(req,res) =>{ 
-  const cart = JSON.parse(req.body.order)
-  const productList = []
-  //loop through ids in cart then make into html string and remove commas
-  for(let id in cart.items){
-      //make sure number ends in 2 numbers after decimal instead of 69. its 69.00
-      let product_Price = cart.items[id].price.toString();
-      let checked_Price = product_Price.split(".");
-      if(checked_Price[1].length < 2){
-          for(i = checked_Price[1].length; i<2; i++){
-              checked_Price[1] = checked_Price[1] +'0';
-          }
-          checked_Price = checked_Price[0] + '.'+ checked_Price[1]
-          
-      }
-      else {
-          checked_Price = checked_Price[0] + "." + checked_Price[1];
-      }
-    let product =  createProductHtml(id,checked_Price,cart.items[id].img_url,cart.items[id].qty)
-      productList.push(product)
-      
-  } 
-
-  let order = createOrderHtml(productList,cart.totalQty,cart.totalPrice,req.body.email,req.body.phone,req.body.shipping)
-
-  sendMail(transporter,mailOptions(order))
-//send cart to client with different cookie name as we will delete the current cart
-res.cookie('oldcart', req.body.order, { maxAge: 24*24*60*60*1000, httpOnly: false});
-res.status(200)
-res.redirect('/success')
-
-/*  //regex to verify
-  if(!phonePattern.test(number_Input.value)){
-   
-  }
-  else{
-      
+  try {
+    const date = new Date();
+    const current_date = date.toLocaleString('en-US', { timeZone: 'America/Los_Angeles', weekday: 'long', hour: 'numeric', hour12: false})
+    const current_day = current_date.split(',')[0]
+    const current_hour = parseInt(current_date.split(',')[1])
     
-  }*/
+    const cart = JSON.parse(req.body.order)
+    const productList = []
+    //loop through ids in cart then make into html string and remove commas
+    for(let id in cart.items){
+        //make sure number ends in 2 numbers after decimal instead of 69. its 69.00
+        let product_Price = cart.items[id].price.toString();
+        let checked_Price = product_Price.split(".");
+        if(checked_Price[1].length < 2){
+            for(i = checked_Price[1].length; i<2; i++){
+                checked_Price[1] = checked_Price[1] +'0';
+            }
+            checked_Price = checked_Price[0] + '.'+ checked_Price[1]
+            
+        }
+        else {
+            checked_Price = checked_Price[0] + "." + checked_Price[1];
+        }
+        //make html for email confirmation of order
+      let product =  createProductHtml(id,checked_Price,cart.items[id].img_url,cart.items[id].qty)
+        productList.push(product)
+        
+    } 
+    //make total price end in 2 numbers after decimal
+    let product_Price = cart.totalPrice.toString();
+    let checked_Price = product_Price.split(".");
+    if(checked_Price[1].length < 2){
+        for(i = checked_Price[1].length; i<2; i++){
+            checked_Price[1] = checked_Price[1] +'0';
+        }
+        checked_Price = checked_Price[0] + '.'+ checked_Price[1]
+        
+    }
+    else {
+        checked_Price = checked_Price[0] + "." + checked_Price[1];
+    }
+  
+    let order = createOrderHtml(productList,cart.totalQty,checked_Price,req.body.email,req.body.phone,req.body.shipping)
+  
+    
+  //send cart to client with different cookie name as we will delete the current cart
+ 
+  
+   //regex to verify
+   //if req fails to meet requirments we will send error msg to display on front end
+    if(!phonePattern.test(req.body.phone)){
+      const body = {msg: `Please enter a valid Phone number.`}
+      res.status(400)
+      res.send(body)
+    }
+    else if(cart.totalQty < 3){
+      const body = {msg: `Our minimum order size for delivery is 3 items.`}
+      res.status(400)
+      res.send(body)
+    } 
+    else if(current_day == 'Sunday' ||  current_hour <= 7 || current_hour >= 20 ){
+      const body = {msg: `Our buisness hours are Mon-Sat 8am-8pm.`}
+      res.status(400)
+      res.send(body)
+    } 
+    
+    else{
+      const email_results =  await sendMail(transporter,mailOptions(order))
+      if( email_results == true){
+        res.cookie('oldcart', req.body.order, { maxAge: 24*24*60*60*1000, httpOnly: false});
+        res.status(200)
+        res.redirect('/success')
+      }  else{
+        const body = {msg: `Network error.`}
+        res.status(500)
+        res.send(body)
+      }    
+      
+    }
+  } catch (error) {
+    console.error(error)
+    const body = {msg: `Network error.`}
+    res.status(500)
+    res.send(body)
+    
+  }
+ 
 
 })
 
@@ -116,14 +169,7 @@ app.listen(3000, () =>{
 
 //create each product card for html email
 function createProductHtml(name,price,img_url,qty){
- const html = ` <div class="product-card" style="padding-top: 16px; padding-bottom: 16px;
-  display: flex;
-  background-color: #fff;
-  position: relative;
-  margin-left: 24px;
-  margin-right: 24px;
-  border-radius: 24px;
-  box-shadow: 0 0 5px 0 rgba(0, 0, 0, .1);">
+ const html = ` <div class="product-card" style="display: flex; margin-top: 16px; margin-bottom: 16px">
     <div class="img-box">
     <img src=${img_url} style="object-fit: scale-down;
     height: 80px;
@@ -149,7 +195,7 @@ padding-right:16px;">
         
         margin-bottom: 40px;
         margin-top: 8px;">
-            ${qty}
+           qty: ${qty}
           </span>
     </div>
     
@@ -165,21 +211,17 @@ function createOrderHtml(products,totalqty,totalprice,email,number,shipping){
   margin: 0;        
   font-size: 20px;">New Order</h3> ` + products.toString() + `</div>
   <div class="total" style="   margin-top: 8px;
-  display: flex;
   justify-content: center;
   margin-bottom: 16px;
   flex-direction: column;
   text-align: center">
                           <span class="total-qty" style=" padding-right: 16px;">${totalqty} Items</span>
-                          <span class="total-price" style="font-weight: 700;">Total Price <span class="checkout-price">$${totalprice}</span></span><br>
-                          <span class="total-price" style="font-weight: 700;">${email}</span><br>
-                          <span class="total-price" style="font-weight: 700;">${number}</span><br>
-                          <span class="total-price" style="font-weight: 700;">${shipping}</span>
+                          <span style="display=block;" class="total-price" style="font-weight: 700;">Total Price <span class="checkout-price">$${totalprice}</span></span>
+                         <div> <p  class="total-price" style="font-weight: 700;">email: ${email}</p> </div>
+                         <div> <p  class="total-price" style="font-weight: 700;">phone: ${number}</p> </div>
+                         <div> <p  class="total-price" style="font-weight: 700;">shipping: ${shipping}</p> </div>
                       </div>
-                     `/*<body style=" margin: 0;
-                      background-color: rgba(251, 250, 247, 1);
-                       font-family: 'Times New Roman', Times, serif;
-                       overflow-x: hidden;"`></body> */
+                     `
   //remove commas from the array to string 
   const finalhtml = html.replace(/,/g, "")
   return finalhtml

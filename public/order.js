@@ -10,7 +10,7 @@ const number_Input = document.querySelector(".number-input")
 const shipping_Input = document.querySelector(".shipping-input")
 const apt_Number_Input = document.querySelector(".apt-num-input")
 const checkout_Btn = document.querySelector(".checkout-btn") 
-
+const error_msg = document.querySelector(".error-msg")
 checkCookie("cart")
 pageReload()
 render_Page()
@@ -20,7 +20,9 @@ function render_Page(){
   const cookie = getCookie("cart")
   if(typeof cookie == 'string'){
     const cart = JSON.parse(cookie)
-    const order_List = []
+    const order_List = [];
+      
+    
     //loop through ids in cart then make into html string and remove commas
     for(let id in cart.items){
         //make sure number ends in 2 numbers after decimal instead of 69. its 69.00
@@ -59,7 +61,12 @@ function render_Page(){
    //update the dom 
     order.innerHTML = finalhtml
   
-  }else console.log("nocart")
+  }else {
+    order.innerHTML = ` <a href="/"  class="homepage-box"> <button class="homepage">Homepage</button>
+    </a>
+   
+`
+  }
 }
 
 function Checkout_Form(phone,email,shipping,order){
@@ -78,7 +85,11 @@ const checkout_form = new Checkout_Form(number_Input.value,email_Input.value,shi
    
     //regex to verify
     if(!phonePattern.test(number_Input.value)){
-       
+       error_msg.textContent = `Please enter a valid Phone number`;
+       error_msg.classList.add('active')    
+       error_msg.scrollIntoView({
+        behavior: "smooth"
+    });
     }
     else{
         try {
@@ -89,6 +100,17 @@ const checkout_form = new Checkout_Form(number_Input.value,email_Input.value,shi
             }).then((res) =>{
                 if(res.status ==200){
                     window.location.href = '/success'
+                }else //parses respone the displays error message to ui
+                    {res.json().then((body) =>{
+                    const msg = body.msg;
+                    error_msg.textContent = msg;
+                    error_msg.classList.add('active')    
+                    error_msg.scrollIntoView({
+                     behavior: "smooth"
+                 });
+
+                })           
+                    
                 }
             })
         } catch (error) {

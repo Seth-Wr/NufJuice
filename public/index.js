@@ -5,6 +5,8 @@ const product_Name = document.querySelectorAll(".product-name")
 const product_Price = document.querySelectorAll(".price")
 const product_Img = document.querySelectorAll(".product-img")
 const shopping_bag_qty = document.querySelector(".shopping-bag-qty")
+const toast_container = document.querySelector(".toast-container")
+const toast_msg = document.querySelector(".toast-msg")
 
 checkCookie("cart")
 pageReload()
@@ -17,7 +19,7 @@ start_Shopping.forEach((item,i) =>{
         });
     })
 })
-
+//add to cart
 order_Button.forEach((item,i) =>{
     //add item to our cart object in the cookie first has to be uri encoded
     // to save proper values for special characters
@@ -39,6 +41,12 @@ order_Button.forEach((item,i) =>{
         setCookie('cart',cart_String, 24)
         shopping_bag_qty.textContent = newCart.totalQty
         shopping_bag_qty.classList.add("active")
+        toast_msg.textContent =`${product_Name[i].textContent} has been added to your cart`
+        toast_container.classList.add("active")
+       const toast_timeout = setTimeout(toast_remove,2000)
+       function toast_remove(){
+        toast_container.classList.remove("active")
+    }
     })
 })
 

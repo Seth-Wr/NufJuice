@@ -11,6 +11,7 @@ const shipping_Input = document.querySelector(".shipping-input")
 const apt_Number_Input = document.querySelector(".apt-num-input")
 const checkout_Btn = document.querySelector(".checkout-btn") 
 const error_msg = document.querySelector(".error-msg")
+const loader = document.querySelector(".loader-container")
 checkCookie("cart")
 pageReload()
 render_Page()
@@ -93,12 +94,14 @@ const checkout_form = new Checkout_Form(number_Input.value,email_Input.value,shi
     }
     else{
         try {
+            loader.classList.add('active')
             fetch('/order',{
                 method: 'post',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(checkout_form),
             }).then((res) =>{
                 if(res.status ==200){
+                    loader.classList.remove('active');
                     window.location.href = '/success'
                 }else //parses respone the displays error message to ui
                     {res.json().then((body) =>{
@@ -108,7 +111,7 @@ const checkout_form = new Checkout_Form(number_Input.value,email_Input.value,shi
                     error_msg.scrollIntoView({
                      behavior: "smooth"
                  });
-
+                 loader.classList.remove('active');
                 })           
                     
                 }
@@ -144,7 +147,7 @@ function create_Order(name,price,img_url,qty){
     qty_Input_Active = 'qty-input'
     qty_Select_Active = 'qty-select active'
   }
-  return  `     <div class="product-card">
+  return  `    <div class="product-card-wrapper"> <div class="product-card">
     <div class="img-box">
     <img src="${img_url}" alt="">
 </div>
@@ -169,6 +172,7 @@ function create_Order(name,price,img_url,qty){
         </select>  
         <input type="number" class="${qty_Input_Active}" value='${qty}'>
         <button class="remove-btn">remove</button>
+    </div>
     </div>
     </div>`
 }

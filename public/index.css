@@ -28,6 +28,7 @@ main{
     width: 100%;
     position: relative;
 }
+
 .shopping-bag-box{
     position: absolute;
     right: 24px;
@@ -96,20 +97,82 @@ main{
     95%{opacity: 1;}
     100%{opacity: 0;}
 }
+@keyframes ad-3 {
+    0% { opacity: 0;}
+    10%{ opacity: 1;}
+    20% {opacity: 1;}
+    30% {opacity: 0;}
+}
+@keyframes ad-4{
+    30%{opacity: 0;}
+    40%{opacity: 1;}
+    90%{opacity: 1;}
+    100%{opacity: 0;}
+}
 
 
-.hero-img img{
-    margin-top: 40px;
-object-fit: scale-down;
-width: 100%;
-vertical-align: bottom;
+
+
+.hero-img h2{
+    opacity: 0;
+   color: #000;
+   margin: 0;
+   padding: 16px;
+   padding-top: 48px;
+   font-size: 32px;
+   animation: ad-3 10s infinite;
+
+}
+
+.hero-img-slide img{
+        position: absolute;
+    right: 8px;
+    top: 72px;
+    object-fit: scale-down;
+    height: 120px;
+    width: 120px;
+}
+.hero-img-slide{
+    opacity: 0;
+    position: absolute;
+    top: 24px;
+    width: 100%;
+    animation: ad-4 10s infinite;
+    background-color: #fff;
+    height: 200px;
+
+}
+.hero-img-slide h3{
+   
+    font-size: 45px;
+  
+}
+.hero-img-slide h3, p{
+    margin: 0;
+}
+.hero-img-slide p{
+    font-size: 20px;
+    text-align: left;
+    margin-top: 24px;
+    padding-left: 24px;
+    padding-right: 100px;
 
 }
 
 .hero-img{
+    position: relative;
+    height: 280px;
+    text-align: center;
+    background-color: #fff;
+  
    border-bottom: 2px solid #000;
 }
-
+.about-us-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
 .about-us{
     margin: 24px;
     text-align: center;
@@ -120,14 +183,21 @@ vertical-align: bottom;
     width: 100%;
    
 }
-
+.about-us-text{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
 .about-us-text p{
     text-align: center;
     padding-left: 8px;
     padding-right: 8px; 
     font-size: 20px;
+    max-width: 600px;
+    
 }
 .about-us-button{
+    margin-top: 8px;
     display: flex;
     justify-content: center;
     margin-bottom: 32px;
@@ -151,6 +221,11 @@ vertical-align: bottom;
     color: #fff;
     font-size: 24px;
 }
+.our-mission-text{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
 .our-mission p{
     color: #fff;
     font-size: 20px;
@@ -158,6 +233,7 @@ vertical-align: bottom;
     padding-right: 8px;
     margin-top: 24px;
     margin-bottom: 24px;
+    max-width: 600px;
 }
 .our-mission-button{
     display: flex;
@@ -174,6 +250,18 @@ vertical-align: bottom;
  font-size: 16px;   
 }
 
+.product-card-wrapper{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    background: transparent;
+}
+.menu{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  /*  flex-wrap: wrap; */
+}    
 .product-card{
     display: flex;
     justify-content: center;
@@ -183,6 +271,8 @@ vertical-align: bottom;
     flex-direction: column;
     box-shadow: 0 0 5px 0 rgba(0,0,0, .1);
     border-radius: 24px;
+    max-width: 360px;
+
 }
 .product-name{
     padding-left: 16px;
@@ -232,6 +322,34 @@ vertical-align: bottom;
     justify-content: center;
     padding-bottom: 24px;
 }
+.toast-container{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: transparent; 
+    z-index: 28; /* Ensure loader is on top but nav still useable*/
+}
+.toast-container.active{
+    display: flex;
+}
+.toast-msg{
+    text-align: center;
+    min-height: 20px;
+    opacity: .8;
+    display: flex;
+    justify-content: center;
+    width: 250px;
+    padding: 16px;
+    background-color: #444; 
+    border: 1px solid #222;
+    color: #fff;
+
+}
 
 .footer{
     text-align: center;
@@ -258,3 +376,150 @@ vertical-align: bottom;
     color: #fff;
     text-decoration: none;
 }
+@media(min-width: 500px){
+    .ad-1 p{
+        text-align: center;
+       
+        width: 100%;
+    }
+    .ad-2 p{
+        text-align: center;
+        
+        width: 100%;
+    }
+    .hero-img h2{
+        font-size: 50px;
+        padding-top: 16px;
+    }
+    .hero-img-slide p{
+        text-align: center;
+        padding: 0;
+    }
+    .about-us-text p{
+      
+        padding-left: 24px;
+        padding-right: 24px; 
+     
+    }
+    .our-mission p{
+        padding-left: 24px;
+        padding-right: 24px; 
+    }
+}
+@media(min-width: 790px){
+
+    .hero-img h2{
+    
+       margin: 0;
+       padding-top: 30px;
+       font-size: 60px;
+      
+    
+    }
+    
+    .hero-img-slide img{
+            
+        right: 32px;
+        top: 32px;
+        
+        height: 150px;
+        width: 150px;
+    }
+    .hero-img-slide{
+      
+        top: 40px;
+        
+     
+        
+    
+    }
+    .hero-img-slide h3{
+       
+        font-size: 65px;
+      
+    }
+    .hero-img-slide p{
+        text-align: center;
+        font-size: 25px;
+        padding: 0;
+        margin: 0;
+     
+        
+    }
+    .about-us-text p{
+      
+        padding-left: 88px;
+        padding-right: 88px; 
+     
+    }
+    .our-mission p{
+        padding-left: 88px;
+        padding-right: 88px; 
+    }
+    
+    
+    }
+@media(min-width:1000px){
+    .hero-img-slide img{
+            
+        right: 88px;
+        top: 32px;
+        
+        height: 150px;
+        width: 150px;
+    }
+}
+@media (min-width: 1250px) {
+    .hero-img h2{
+        
+       padding-top: 64px;
+       font-size: 70px;
+       
+    
+    }
+    
+    .hero-img-slide img{
+            position: absolute;
+        right: 200px;
+        top: 12px;
+        object-fit: scale-down;
+        height: 200px;
+        width: 200px;
+    }
+    .hero-img-slide{
+    
+        top: 80px;
+        height: 280px;
+    
+    }
+    .hero-img-slide h3{
+       
+        font-size: 65px;
+      
+    }
+    .hero-img-slide p{
+        font-size: 35px;
+        padding: 0;
+        margin: 0;
+        text-align: center;
+    }
+    .hero-img{
+        position: relative;
+        height: 400px;
+        text-align: center;
+        background-color: #fff;
+       
+       border-bottom: 2px solid #000;
+   }
+   .about-us-text p{
+      
+    padding-left: 120px;
+    padding-right: 120px; 
+ 
+}
+.our-mission p{
+    padding-left: 120px;
+    padding-right: 120px; 
+    
+}
+}  

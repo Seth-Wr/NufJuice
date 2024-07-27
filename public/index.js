@@ -43,7 +43,7 @@ order_Button.forEach((item,i) =>{
         shopping_bag_qty.classList.add("active")
         toast_msg.textContent =`${product_Name[i].textContent} has been added to your cart`
         toast_container.classList.add("active")
-       const toast_timeout = setTimeout(toast_remove,2000)
+       const toast_timeout = setTimeout(toast_remove,1000)
        function toast_remove(){
         toast_container.classList.remove("active")
     }

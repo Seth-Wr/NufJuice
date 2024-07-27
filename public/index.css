@@ -259,8 +259,8 @@ main{
 .menu{
     display: flex;
     justify-content: center;
-    flex-direction: column;
-  /*  flex-wrap: wrap; */
+   flex-direction: column;
+     
 }    
 .product-card{
     display: flex;
@@ -271,7 +271,7 @@ main{
     flex-direction: column;
     box-shadow: 0 0 5px 0 rgba(0,0,0, .1);
     border-radius: 24px;
-    max-width: 360px;
+    width: 271px;
 
 }
 .product-name{
@@ -295,6 +295,7 @@ main{
     padding-left: 24px;
     padding-right: 24px;
     opacity: .7;
+    margin-bottom: 8px;
 }
 .img-box img{
     object-fit: scale-down;
@@ -340,7 +341,8 @@ main{
 .toast-msg{
     text-align: center;
     min-height: 20px;
-    opacity: .8;
+    opacity: .5;
+    border-radius: 8px;
     display: flex;
     justify-content: center;
     width: 250px;
@@ -404,6 +406,9 @@ main{
     .our-mission p{
         padding-left: 24px;
         padding-right: 24px; 
+    }
+    .product-card{
+        width: 360px;
     }
 }
 @media(min-width: 790px){
